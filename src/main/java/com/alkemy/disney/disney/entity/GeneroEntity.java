@@ -13,10 +13,10 @@ import javax.persistence.*;
 public class GeneroEntity {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nomnbre;
+    private String nombre;
 
     private String imagen;
 

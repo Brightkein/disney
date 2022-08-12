@@ -19,7 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class PeliculaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String imagen;
@@ -35,6 +35,7 @@ public class PeliculaEntity {
 
     @Column(name = "genero_id", nullable = false)
     private Long generoId;
+
     @ManyToMany(
         cascade = {
             CascadeType.PERSIST,
@@ -47,4 +48,9 @@ public class PeliculaEntity {
         inverseJoinColumns = @JoinColumn(name = "personaje_id")
     )
     private Set<PersonajeEntity> personajes = new HashSet<>();
+
+    @PrePersist
+    void prePersist () {
+        setFechaCreacion(LocalDate.now());
+    }
 }
